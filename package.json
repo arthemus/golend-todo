@@ -5,7 +5,7 @@
   "scripts": {
     "start": "",
     "debug": "",
-    "test": "jest"
+    "test": "standard && jest"
   },
   "repository": {
     "type": "git",
@@ -35,5 +35,10 @@
   },
   "jest": {
     "testEnvironment": "node"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
   }
 }
