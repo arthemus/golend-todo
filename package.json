@@ -5,7 +5,7 @@
   "scripts": {
     "start": "",
     "debug": "",
-    "test": "standard && jest"
+    "test": "standard && jest --coverage"
   },
   "repository": {
     "type": "git",
