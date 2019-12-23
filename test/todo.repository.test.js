@@ -8,7 +8,7 @@ const MOCK_DATA = JSON.parse(fs.readFileSync(file, 'utf8'))
 const Repository = require('./../src/repositories/todo.repository')
 
 test('Creating a existing item.', () => {
-  const rInstance = Repository.init()
+  const rInstance = Repository.init(true)
   const originalData = rInstance.read()
   rInstance.create({
     id: 'deb4508d-4fd1-47a4-9b04-20c5a895a656',
@@ -21,7 +21,7 @@ test('Creating a existing item.', () => {
 })
 
 test('Creating a new item.', () => {
-  const rInstance = Repository.init()
+  const rInstance = Repository.init(true)
   const originalData = rInstance.read()
   rInstance.create({
     id: uuid.v4(),
@@ -34,27 +34,27 @@ test('Creating a new item.', () => {
 })
 
 test('Reading default todo list data.', () => {
-  const instance = Repository.init()
+  const instance = Repository.init(true)
   expect(instance.data).toEqual(MOCK_DATA)
 })
 
 test('Getting full data with id as null.', () => {
-  const data = Repository.init().read(null)
+  const data = Repository.init(true).read(null)
   expect(data).toEqual(MOCK_DATA)
 })
 
 test('Getting item from ID.', () => {
-  const data = Repository.init().read('deb4508d-4fd1-47a4-9b04-20c5a895a656')
+  const data = Repository.init(true).read('deb4508d-4fd1-47a4-9b04-20c5a895a656')
   expect(data.message).toBe('Deliver Golend project test')
 })
 
 test('Getting item from wrong ID.', () => {
-  const data = Repository.init().read('1')
+  const data = Repository.init(true).read('1')
   expect(data).toEqual({})
 })
 
 test('Updating message item.', () => {
-  const rInstance = Repository.init()
+  const rInstance = Repository.init(true)
   const data = rInstance.read('deb4508d-4fd1-47a4-9b04-20c5a895a656')
   expect(data.message).toBe('Deliver Golend project test')
   data.message = 'Delivering a project test'
@@ -64,7 +64,7 @@ test('Updating message item.', () => {
 })
 
 test('Deliting a wrong item ID.', () => {
-  const rInstance = Repository.init()
+  const rInstance = Repository.init(true)
   const originalData = rInstance.read()
   rInstance.delete(1)
   const updatedData = rInstance.read()
@@ -72,7 +72,7 @@ test('Deliting a wrong item ID.', () => {
 })
 
 test('Deliting and check new list.', () => {
-  const rInstance = Repository.init()
+  const rInstance = Repository.init(true)
   const originalData = rInstance.read()
   rInstance.delete('deb4508d-4fd1-47a4-9b04-20c5a895a656')
   const updatedData = rInstance.read()

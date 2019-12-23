@@ -27,6 +27,15 @@ class TodoService {
     this.repository.create(todo)
     return todo
   }
+
+  async update (id, data) {
+    const todoObj = await this.findById(id)
+    if (!todoObj) throw new Error(`TODO ${id} not found.`)
+    const { message, due } = data
+    if (!message || !due) throw new Error('A message description and a due date are necessary to create a new Todo.')
+    this.repository.update(data)
+    return data
+  }
 }
 
 module.exports = TodoService

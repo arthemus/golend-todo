@@ -12,15 +12,17 @@ class TodoRepository {
     this.data = data
   }
 
-  static init () {
-    let todoMockdata
-    let file = path.resolve(__dirname, './../../.db')
-    if (fs.existsSync(file)) {
-      todoMockdata = JSON.parse(fs.readFileSync(file, 'utf8'))
-    } else {
-      file = path.resolve(__dirname, './../../data/mock-todos.json')
-      todoMockdata = JSON.parse(fs.readFileSync(file, 'utf8'))
+  static init (forTests = false) {
+    let file
+    if (!forTests) {
+      file = path.resolve(__dirname, './../../.db')
+      if (fs.existsSync(file)) {
+        const dbData = JSON.parse(fs.readFileSync(file, 'utf8'))
+        return new TodoRepository(dbData)
+      }
     }
+    file = path.resolve(__dirname, './../../data/mock-todos.json')
+    const todoMockdata = JSON.parse(fs.readFileSync(file, 'utf8'))
     return new TodoRepository(todoMockdata)
   }
 
