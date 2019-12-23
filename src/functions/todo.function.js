@@ -1,5 +1,3 @@
-'use strict'
-
 const r = require('./../helpers/response.helper')
 const Repository = require('./../repositories/todo.repository')
 const Service = require('./../services/todo.service')

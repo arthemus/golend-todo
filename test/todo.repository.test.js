@@ -7,6 +7,16 @@ const MOCK_DATA = JSON.parse(fs.readFileSync(file, 'utf8'))
 
 const Repository = require('./../src/repositories/todo.repository')
 
+test('Init repository with mock data.', () => {
+  expect(MOCK_DATA).toEqual(Repository.init(true).read())
+})
+
+test('Sync db data.', () => {
+  const file = path.resolve(__dirname, './../.db')
+  Repository.init().read()
+  expect(true).toBe(fs.existsSync(file))
+})
+
 test('Creating a existing item.', () => {
   const rInstance = Repository.init(true)
   const originalData = rInstance.read()
