@@ -25,4 +25,11 @@ functions:
           path: api/todo
           method: get
           cors: true
-
+  todoFindById:
+    handler: src/functions/todo.function.findById
+    memorySize: 1024
+    events:
+      - http:
+          path: api/todo/{id}
+          method: get
+          cors: true

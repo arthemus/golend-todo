@@ -12,3 +12,13 @@ module.exports.findAll = (event, context, callback) => {
     .then((data) => callback(null, r.success(data)))
     .catch((err) => callback(null, r.failure(err)))
 }
+
+module.exports.findById = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false
+  const service = new Service(Repository.init())
+  const todoId = event.pathParameters.id
+  service
+    .findById(todoId)
+    .then((data) => callback(null, r.success(data)))
+    .catch((err) => callback(null, r.failure(err)))
+}

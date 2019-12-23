@@ -10,6 +10,10 @@ class TodoService {
   async findAll () {
     return this.repository.read()
   }
+
+  async findById (todoId) {
+    return this.repository.read(todoId)
+  }
 }
 
 module.exports = TodoService
