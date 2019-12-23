@@ -36,6 +36,13 @@ class TodoService {
     this.repository.update(data)
     return data
   }
+
+  async delete (id) {
+    const todoObj = await this.findById(id)
+    if (!todoObj) throw new Error(`TODO ${id} not found.`)
+    this.repository.delete(id)
+    return todoObj
+  }
 }
 
 module.exports = TodoService

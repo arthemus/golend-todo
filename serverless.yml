@@ -41,3 +41,19 @@ functions:
           path: api/todo
           method: post
           cors: true
+  todoUpdate:
+    handler: src/functions/todo.function.update
+    memorySize: 1024
+    events:
+      - http:
+          path: api/todo/{id}
+          method: put
+          cors: true
+  todoDelete:
+    handler: src/functions/todo.function.delete
+    memorySize: 1024
+    events:
+      - http:
+          path: api/todo/{id}
+          method: delete
+          cors: true

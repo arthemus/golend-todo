@@ -32,3 +32,24 @@ module.exports.create = (event, context, callback) => {
     .then((data) => callback(null, r.success(data)))
     .catch((err) => callback(null, r.failure(err)))
 }
+
+module.exports.update = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false
+  const service = new Service(Repository.init())
+  const todoId = event.pathParameters.id
+  const data = event.body && JSON.parse(event.body)
+  service
+    .update(todoId, data)
+    .then((data) => callback(null, r.success(data)))
+    .catch((err) => callback(null, r.failure(err)))
+}
+
+module.exports.delete = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false
+  const service = new Service(Repository.init())
+  const todoId = event.pathParameters.id
+  service
+    .delete(todoId)
+    .then((data) => callback(null, r.success(data)))
+    .catch((err) => callback(null, r.failure(err)))
+}
