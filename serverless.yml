@@ -17,3 +17,12 @@ provider:
   region: ap-southeast-2
 
 functions:
+  todoFindAll:
+    handler: src/functions/todo.function.findAll
+    memorySize: 1024
+    events:
+      - http:
+          path: api/todo
+          method: get
+          cors: true
+

@@ -1,0 +1,14 @@
+'use strict'
+
+const r = require('./../helpers/response.helper')
+const Repository = require('./../repositories/todo.repository')
+const Service = require('./../services/todo.service')
+
+module.exports.findAll = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false
+  const service = new Service(Repository.init())
+  service
+    .findAll()
+    .then((data) => callback(null, r.success(data)))
+    .catch((err) => callback(null, r.failure(err)))
+}

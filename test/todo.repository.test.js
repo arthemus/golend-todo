@@ -5,7 +5,7 @@ const path = require('path')
 const file = path.resolve(__dirname, './../data/mock-todos.json')
 const MOCK_DATA = JSON.parse(fs.readFileSync(file, 'utf8'))
 
-const Repository = require('./../src/helpers/repository.helper')
+const Repository = require('./../src/repositories/todo.repository')
 
 test('Creating a existing item.', () => {
   const rInstance = Repository.init()

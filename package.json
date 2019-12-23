@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Golend Serverless project.",
   "scripts": {
-    "start": "",
-    "debug": "",
+    "start": "./node_modules/.bin/serverless offline -s dev -P 6000",
+    "debug": "export SLS_DEBUG=* && node --inspect ./node_modules/.bin/serverless offline -s dev -P 6000",
     "test": "standard && jest --coverage"
   },
   "repository": {

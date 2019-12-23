@@ -7,7 +7,7 @@ const path = require('path')
  * The main idea it is how to provide a data source
  * and basic CRUD methods to manager the information.
  */
-class Repository {
+class TodoRepository {
   constructor (data) {
     this.data = data
   }
@@ -15,7 +15,7 @@ class Repository {
   static init () {
     const file = path.resolve(__dirname, './../../data/mock-todos.json')
     const todoMockdata = JSON.parse(fs.readFileSync(file, 'utf8'))
-    return new Repository(todoMockdata)
+    return new TodoRepository(todoMockdata)
   }
 
   create (data) {
@@ -46,4 +46,4 @@ class Repository {
   }
 }
 
-module.exports = Repository
+module.exports = TodoRepository
