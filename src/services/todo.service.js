@@ -1,3 +1,7 @@
+const uuid = require('uuid')
+
+const Todo = require('./../models/todo.model')
+
 /**
  * Service class for Todo model with possible business rules for a TODO module.
  * Using a basic implementation of Repository with CRUD operations.
@@ -13,6 +17,15 @@ class TodoService {
 
   async findById (todoId) {
     return this.repository.read(todoId)
+  }
+
+  async create (todoData) {
+    if (!todoData) throw new Error('Todo data could not be null or undefined.')
+    const { message, due } = todoData
+    if (!message || !due) throw new Error('A message description and a due date are necessary to create a new Todo.')
+    const todo = new Todo(uuid.v4(), new Date(), message, due)
+    this.repository.create(todo)
+    return todo
   }
 }
 

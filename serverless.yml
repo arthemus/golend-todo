@@ -33,3 +33,11 @@ functions:
           path: api/todo/{id}
           method: get
           cors: true
+  todoCreate:
+    handler: src/functions/todo.function.create
+    memorySize: 1024
+    events:
+      - http:
+          path: api/todo
+          method: post
+          cors: true
