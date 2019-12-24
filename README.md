@@ -16,13 +16,13 @@ To run the unit test coverage and get a first view of the main project files:
 npm run test
 ```
 
-This project is using `Serverless` framework to optimise and simplify the deploy for a Cloud provider as AWS. In this case is not necessary deploy all endpoints before test, it is possible run the project locally using the pluging `serverless-offline`:
+This project is using `Serverless` framework to optimise and simplify the deploy for a Cloud provider as AWS. In this case is not necessary deploy all endpoints before test, it is possible to run the project locally using the plugin `serverless-offline`:
 
 ```
 npm run start
 ```
 
-After this is possible tests the follow endpoints:
+After this is possible tests the following endpoints:
 
 ```
 GET: http://localhost:6000/api/todo
@@ -43,7 +43,8 @@ To create a new TODO:
 }
 ```
 
-To update a existing TODO:
+To update an existing TODO:
+
 ```json
 {
   "id": "",
