@@ -58,3 +58,44 @@ test('Updating a todo record.', () => {
         })
     })
 })
+
+test('Updating a todo record without correct message.', () => {
+  const service = new Service(Repository.init(true))
+  return service
+    .update('9a19b0d9-2d69-45e2-8fd4-28d8c8ebad07', {})
+    .catch(err => expect(err).toEqual(Error('A message description and a due date are necessary to create a new Todo.')))
+})
+
+test('Updating a todo record without id.', () => {
+  const service = new Service(Repository.init(true))
+  return service
+    .update(null, {})
+    .catch(err => expect(err).toEqual(Error('A Todo ID is necessary.')))
+})
+
+test('Updating a todo record with wrong id.', () => {
+  const service = new Service(Repository.init(true))
+  return service
+    .update('123', {})
+    .catch(err => expect(err).toEqual(Error('TODO 123 not found.')))
+})
+
+test('Deleting a todo record.', () => {
+  var originalCount
+  const service = new Service(Repository.init(true))
+  return service.findAll().then((data) => {
+    originalCount = data.length
+    return service.delete('9a19b0d9-2d69-45e2-8fd4-28d8c8ebad07').then(() => {
+      return service.findAll().then((afterDelete) => {
+        expect(afterDelete.length).toBe(originalCount - 1)
+      })
+    })
+  })
+})
+
+test('Deleting todo record with wrong id.', () => {
+  const service = new Service(Repository.init(true))
+  return service
+    .delete('123')
+    .catch(err => expect(err).toEqual(Error('TODO 123 not found.')))
+})

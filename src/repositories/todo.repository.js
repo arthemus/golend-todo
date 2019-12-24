@@ -12,7 +12,7 @@ class TodoRepository {
     this.data = data
   }
 
-  static init (forTests = false) {
+  static init (forTests) {
     let file
     if (!forTests) {
       file = path.resolve(__dirname, './../../.db')

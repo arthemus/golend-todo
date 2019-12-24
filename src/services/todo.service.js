@@ -16,7 +16,10 @@ class TodoService {
   }
 
   async findById (todoId) {
-    return this.repository.read(todoId)
+    if (!todoId) throw new Error('A Todo ID is necessary.')
+    const todoObj = this.repository.read(todoId)
+    if (!todoObj.id) return null
+    return todoObj
   }
 
   async create (todoData) {

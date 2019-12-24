@@ -11,9 +11,9 @@ test('Init repository with mock data.', () => {
   expect(MOCK_DATA).toEqual(Repository.init(true).read())
 })
 
-test('Sync db data.', () => {
-  const file = path.resolve(__dirname, './../.db')
+test('Sync db data without db file.', () => {
   Repository.init().read()
+  const file = path.resolve(__dirname, './../.db')
   expect(true).toBe(fs.existsSync(file))
 })
 
@@ -73,7 +73,7 @@ test('Updating message item.', () => {
   expect(updated.message).toBe('Delivering a project test')
 })
 
-test('Deliting a wrong item ID.', () => {
+test('Deleting a wrong item ID.', () => {
   const rInstance = Repository.init(true)
   const originalData = rInstance.read()
   rInstance.delete(1)
@@ -81,7 +81,7 @@ test('Deliting a wrong item ID.', () => {
   expect(updatedData).toEqual(originalData)
 })
 
-test('Deliting and check new list.', () => {
+test('Deleting and check new list.', () => {
   const rInstance = Repository.init(true)
   const originalData = rInstance.read()
   rInstance.delete('deb4508d-4fd1-47a4-9b04-20c5a895a656')
