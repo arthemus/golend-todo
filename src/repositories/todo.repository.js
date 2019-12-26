@@ -16,7 +16,9 @@ class TodoRepository {
     let file
     if (/false/i.test(forTests)) {
       file = path.resolve(__dirname, './../../.db')
-      if (fs.existsSync(file)) {
+      const fileExists = fs.existsSync(file)
+      if (fileExists) {
+        console.log('File already exists...')
         const dbData = JSON.parse(fs.readFileSync(file, 'utf8'))
         return new TodoRepository(dbData)
       }
