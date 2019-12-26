@@ -107,3 +107,6 @@ dist
 
 # Local database file
 .db
+
+# VSCode
+.vscode/
