@@ -7,6 +7,16 @@ const MOCK_DATA = JSON.parse(fs.readFileSync(file, 'utf8'))
 
 const Repository = require('./../src/repositories/todo.repository')
 
+beforeAll(() => {
+  console.info('Setup TODO Repository tests.')
+  const file = path.resolve(__dirname, './../.db')
+  const fileExists = fs.existsSync(file)
+  if (fileExists) {
+    console.info('Cleaning local database file...')
+    fs.unlinkSync(file)
+  }
+})
+
 test('Init repository with mock data.', () => {
   expect(MOCK_DATA).toEqual(Repository.init(true).read())
 })
@@ -14,7 +24,8 @@ test('Init repository with mock data.', () => {
 test('Sync db data without db file.', () => {
   Repository.init().read()
   const file = path.resolve(__dirname, './../.db')
-  expect(true).toBe(fs.existsSync(file))
+  const fileExists = fs.existsSync(file)
+  expect(fileExists).toBe(true)
 })
 
 test('Creating a existing item.', () => {

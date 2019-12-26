@@ -12,9 +12,9 @@ class TodoRepository {
     this.data = data
   }
 
-  static init (forTests) {
+  static init (forTests = false) {
     let file
-    if (!forTests) {
+    if (/false/i.test(forTests)) {
       file = path.resolve(__dirname, './../../.db')
       if (fs.existsSync(file)) {
         const dbData = JSON.parse(fs.readFileSync(file, 'utf8'))
@@ -23,7 +23,9 @@ class TodoRepository {
     }
     file = path.resolve(__dirname, './../../data/mock-todos.json')
     const todoMockdata = JSON.parse(fs.readFileSync(file, 'utf8'))
-    return new TodoRepository(todoMockdata)
+    const repository = new TodoRepository(todoMockdata)
+    repository.sync()
+    return repository
   }
 
   sync () {
